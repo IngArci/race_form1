@@ -1,0 +1,211 @@
+
+.meraki-form-scope {
+  --gold: #B49537;
+  --black: #000000;
+  --white: #ffffff;
+  --gray: #555555;
+  --cream: #fbf6ea;
+
+  font-family: "Poppins", Arial, Helvetica, sans-serif;
+  color: var(--black);
+}
+
+.meraki-form-scope * {
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+
+.meraki-form-scope .page {
+  padding: 40px 16px;
+}
+
+
+.meraki-form-scope .card {
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto;
+  background: var(--white);
+  border: 2px solid var(--gold);
+  border-radius: 20px;
+  padding: 32px;
+}
+
+.meraki-form-scope .banner-wrap {
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(180, 149, 55, 0.35);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.08);
+  margin-bottom: 18px;
+}
+
+.meraki-form-scope .banner-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Header */
+.meraki-form-scope .logo {
+  display: block;
+  max-width: 160px;
+  margin: 0 auto 18px;
+}
+
+.meraki-form-scope .card-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.meraki-form-scope .card-title {
+  margin: 0;
+  font-size: 26px;
+  color: var(--black);
+}
+
+.meraki-form-scope .card-subtitle {
+  margin-top: 8px;
+  font-size: 14px;
+  color: var(--gray);
+}
+
+
+.meraki-form-scope .input-group,
+.meraki-form-scope .field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 18px;
+}
+
+.meraki-form-scope .input-label,
+.meraki-form-scope .field > label {
+  font-size: 14px;
+  margin-bottom: 6px;
+  color: var(--gold);
+  font-weight: 600;
+}
+
+.meraki-form-scope .input-field,
+.meraki-form-scope select,
+.meraki-form-scope textarea {
+  padding: 12px 14px;
+  font-size: 14px;
+  outline: none;
+
+  background: var(--cream);
+  border: 1px solid rgba(180, 149, 55, 0.35);
+  border-radius: 12px;
+
+  box-shadow:
+    0 6px 14px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.meraki-form-scope textarea.input-field {
+  min-height: 110px;
+  resize: vertical;
+}
+
+.meraki-form-scope .input-field::placeholder {
+  color: rgba(118, 118, 118, 0.45);
+}
+
+.meraki-form-scope .input-field:focus,
+.meraki-form-scope select:focus,
+.meraki-form-scope textarea:focus {
+  border-color: var(--gold);
+  box-shadow:
+    0 8px 18px rgba(0, 0, 0, 0.08),
+    0 0 0 3px rgba(180, 149, 55, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+
+.meraki-form-scope .meraki-row {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+}
+
+.meraki-form-scope .meraki-row .input-group {
+  flex: 1;
+  min-width: 0;
+}
+
+@media (max-width: 600px) {
+  .meraki-form-scope .meraki-row {
+    flex-direction: column;
+  }
+}
+
+
+.meraki-form-scope .file-hint {
+  margin-top: 6px;
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.65);
+}
+
+
+.meraki-form-scope .check {
+  display: flex;
+  gap: 10px;
+  font-size: 14px;
+  color: var(--black);
+}
+
+.meraki-form-scope .check a {
+  color: var(--black);
+  text-decoration: underline;
+}
+
+.meraki-form-scope .check a:hover {
+  color: var(--gold);
+}
+
+
+.meraki-form-scope .submit-button {
+  width: 100%;
+  padding: 14px;
+  background-color: var(--gold);
+  color: var(--white);
+  border: none;
+  border-radius: 14px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.meraki-form-scope .submit-button:hover {
+  background-color: var(--white);
+  color: var(--gold);
+  border: 1px solid var(--gold);
+}
+
+
+.meraki-form-scope .link-button {
+  display: inline-block;
+  text-decoration: none;
+  text-align: center;
+}
+
+
+.meraki-form-scope .legal-box {
+  background: var(--cream);
+  border: 1px solid rgba(180, 149, 55, 0.35);
+  border-radius: 14px;
+  padding: 16px;
+  color: rgba(0, 0, 0, 0.75);
+  line-height: 1.6;
+  font-size: 14px;
+
+  box-shadow:
+    0 6px 14px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.meraki-form-scope .legal-box p {
+  margin: 0 0 12px;
+}

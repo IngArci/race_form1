@@ -1,0 +1,11 @@
+
+
+Mensaje inicial: 
+
+Nombre
+Apellido 
+Teléfono
+EPS
+Selección multiple si y no
+Vas con vehiculo de acompañamiento
+Si es si: placas del vehículo

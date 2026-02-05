@@ -1,0 +1,39 @@
+
+.meraki-form-scope .banner-wrap {
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(180, 149, 55, 0.35);
+  box-shadow: 0 10px 22px rgba(0,0,0,0.08);
+  margin-bottom: 18px;
+}
+
+.meraki-form-scope .banner-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.meraki-form-scope .legal-box {
+  background: var(--cream);
+  border: 1px solid rgba(180,149,55,0.35);
+  border-radius: 14px;
+  padding: 16px;
+  color: rgba(0,0,0,0.75);
+  line-height: 1.6;
+  font-size: 14px;
+
+  box-shadow:
+    0 6px 14px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.meraki-form-scope .legal-box p {
+  margin: 0 0 12px;
+}
+
+.meraki-form-scope .link-button {
+  display: inline-block;
+  text-decoration: none;
+  text-align: center;
+  margin-top: 16px;
+}

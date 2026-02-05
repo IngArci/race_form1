@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Carrera Meraki</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+
+    <link rel="stylesheet" href="styles-carrera.css" />
+</head>
+
+<body>
+
+    <div class="meraki-form-scope">
+        <main class="page">
+            <section class="card">
+
+
+                <div class="banner-wrap">
+                    <img src="encabezado.png" alt="Banner Carrera Meraki" class="banner-img">
+                </div>
+
+                <header class="card-header">
+                    <h1 class="card-title">Bienvenidos a la Carrera Meraki</h1>
+                    <p class="card-subtitle">Completa el formulario para registrarte</p>
+                </header>
+
+
+                <form id="carreraForm" novalidate>
+                    <div class="form-container">
+
+                        <div class="meraki-row">
+                            <div class="input-group">
+                                <label for="nombre" class="input-label">Nombre</label>
+                                <input type="text" id="nombre" name="nombre" class="input-field" placeholder="Nombre"
+                                    required>
+                            </div>
+
+                            <div class="input-group">
+                                <label for="apellido" class="input-label">Apellido</label>
+                                <input type="text" id="apellido" name="apellido" class="input-field"
+                                    placeholder="Apellido" required>
+                            </div>
+                        </div>
+
+                        <div class="meraki-row">
+                            <div class="input-group">
+                                <label for="telefono" class="input-label">Teléfono</label>
+                                <input type="tel" id="telefono" name="telefono" class="input-field" inputmode="numeric"
+                                    pattern="[0-9]+" maxlength="10" placeholder="Teléfono" required>
+                            </div>
+
+                            <div class="input-group">
+                                <label for="eps" class="input-label">EPS</label>
+                                <input type="text" id="eps" name="eps" class="input-field"
+                                    placeholder="Nombre de la EPS" required>
+                            </div>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="vehiculo" class="input-label">¿Vas con vehículo de acompañamiento?</label>
+                            <select id="vehiculo" name="vehiculo" class="input-field" required>
+                                <option value="" disabled selected>Seleccione una opción</option>
+                                <option value="No">No</option>
+                                <option value="Si">Sí</option>
+                            </select>
+                        </div>
+
+
+                        <div class="input-group" id="placaGroup" style="display:none;">
+                            <label for="placa" class="input-label">Placas del vehículo (Colombia)</label>
+                            <input type="text" id="placa" name="placa" class="input-field"
+                                placeholder="Ej: ABC123 o ABC12D">
+                            <small class="file-hint">Formato: ABC123 (carro) o ABC12D (moto)</small>
+                        </div>
+
+
+                        <div class="field">
+                            <label class="check">
+                                <input type="checkbox" required>
+                                <span>
+                                    Acepto participar bajo mi propia responsabilidad.
+                                    <a href="exoneracion.html" target="_blank" rel="noopener noreferrer">Ver
+                                        exoneración</a>
+                                </span>
+                            </label>
+                        </div>
+
+                    </div>
+
+                    <button type="submit" class="submit-button">ENVIAR</button>
+                </form>
+
+            </section>
+        </main>
+    </div>
+
+
+    <script>
+        const SHEETS_URL = "https://script.google.com/macros/library/d/1la7kO8TFn2im0FP3mXl6c5ZajX4yMocwDPI332SCLNCXh-_Dizw10EfN/1";
+
+        const form = document.getElementById("carreraForm");
+        const vehiculo = document.getElementById("vehiculo");
+        const placaGroup = document.getElementById("placaGroup");
+        const placa = document.getElementById("placa");
+
+
+        const placaRegex = /^([A-Z]{3}\d{3}|[A-Z]{3}\d{2}[A-Z])$/;
+
+        vehiculo.addEventListener("change", () => {
+            if (vehiculo.value === "Si") {
+                placaGroup.style.display = "flex";
+                placaGroup.style.flexDirection = "column";
+                placa.required = true;
+            } else {
+                placaGroup.style.display = "none";
+                placa.required = false;
+                placa.value = "";
+            }
+        });
+
+        placa.addEventListener("input", () => {
+            placa.value = placa.value.toUpperCase().replace(/\s/g, "");
+            if (!placaRegex.test(placa.value)) {
+                placa.setCustomValidity("Formato inválido. Ej: ABC123 o ABC12D");
+            } else {
+                placa.setCustomValidity("");
+            }
+        });
+
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+
+            const payload = new URLSearchParams({
+                nombre: document.getElementById("nombre").value.trim(),
+                apellido: document.getElementById("apellido").value.trim(),
+                telefono: document.getElementById("telefono").value.trim(),
+                eps: document.getElementById("eps").value.trim(),
+                vehiculo: vehiculo.value,
+                placa: vehiculo.value === "Si" ? placa.value.trim().toUpperCase() : ""
+            });
+
+            const btn = form.querySelector("button");
+            const originalText = btn.textContent;
+            btn.disabled = true;
+            btn.textContent = "Enviando...";
+
+            try {
+                const res = await fetch(SHEETS_URL, {
+                    method: "POST",
+                    body: payload
+                });
+
+                const text = await res.text();
+                const result = JSON.parse(text);
+
+                if (!result.ok) {
+                    alert(result.error || "Error al guardar información.");
+                    return;
+                }
+
+                window.location.href = "/gracias";
+
+            } catch (err) {
+                console.error(err);
+                alert("Error de conexión con el servidor.");
+            } finally {
+                btn.disabled = false;
+                btn.textContent = originalText;
+            }
+        });
+    </script>
+
+</body>
+
+</html>
