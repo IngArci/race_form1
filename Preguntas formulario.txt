@@ -9,3 +9,7 @@ EPS
 Selección multiple si y no
 Vas con vehiculo de acompañamiento
 Si es si: placas del vehículo
+
+
+Botón de exoneración de responsabilidad civil.
+
