@@ -63,6 +63,21 @@
                         </div>
 
                         <div class="input-group">
+                            <label for="agente" class="input-label">¿Agente inmobiliario?</label>
+                            <select id="agente" name="agente" class="input-field" required>
+                                <option value="" disabled selected>Seleccione una opción</option>
+                                <option value="No">No</option>
+                                <option value="Si">Sí</option>
+                            </select>
+                        </div>
+
+                        <div class="input-group" id="agenteNombreGroup" style="display:none;">
+                            <label for="agenteNombre" class="input-label">Nombre del agente inmobiliario</label>
+                            <input type="text" id="agenteNombre" name="agenteNombre" class="input-field"
+                                placeholder="Nombre del agente">
+                        </div>
+
+                        <div class="input-group">
                             <label for="vehiculo" class="input-label">¿Vas con vehículo de acompañamiento?</label>
                             <select id="vehiculo" name="vehiculo" class="input-field" required>
                                 <option value="" disabled selected>Seleccione una opción</option>
@@ -108,6 +123,9 @@
         const vehiculo = document.getElementById("vehiculo");
         const placaGroup = document.getElementById("placaGroup");
         const placa = document.getElementById("placa");
+        const agente = document.getElementById("agente");
+        const agenteNombreGroup = document.getElementById("agenteNombreGroup");
+        const agenteNombre = document.getElementById("agenteNombre");
 
 
         const placaRegex = /^([A-Z]{3}\d{3}|[A-Z]{3}\d{2}[A-Z])$/;
@@ -121,6 +139,18 @@
                 placaGroup.style.display = "none";
                 placa.required = false;
                 placa.value = "";
+            }
+        });
+
+        agente.addEventListener("change", () => {
+            if (agente.value === "Si") {
+                agenteNombreGroup.style.display = "flex";
+                agenteNombreGroup.style.flexDirection = "column";
+                agenteNombre.required = true;
+            } else {
+                agenteNombreGroup.style.display = "none";
+                agenteNombre.required = false;
+                agenteNombre.value = "";
             }
         });
 
@@ -147,7 +177,9 @@
                 telefono: document.getElementById("telefono").value.trim(),
                 eps: document.getElementById("eps").value.trim(),
                 vehiculo: vehiculo.value,
-                placa: vehiculo.value === "Si" ? placa.value.trim().toUpperCase() : ""
+                placa: vehiculo.value === "Si" ? placa.value.trim().toUpperCase() : "",
+                agente: agente.value,
+                agenteNombre: agente.value === "Si" ? agenteNombre.value.trim() : ""
             });
 
             const btn = form.querySelector("button");
